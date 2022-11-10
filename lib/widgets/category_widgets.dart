@@ -12,6 +12,13 @@ class SliderBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const style = TextStyle(
+      color: Colors.brown,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 10,
+    );
+
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       width: MediaQuery.of(context).size.width * 0.05,
@@ -27,33 +34,22 @@ class SliderBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text(
-                  ' << ',
-                  style: TextStyle(
-                    color: Colors.brown,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 10,
-                  ),
-                ),
+                mainCategoryName == 'beauty'
+                    ? const Text('')
+                    : const Text(
+                        ' << ',
+                        style: style,
+                      ),
                 Text(
                   mainCategoryName.toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.brown,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 10,
-                  ),
+                  style: style,
                 ),
-                const Text(
-                  ' >> ',
-                  style: TextStyle(
-                    color: Colors.brown,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 10,
-                  ),
-                )
+                mainCategoryName == 'men'
+                    ? const Text('')
+                    : const Text(
+                        ' >> ',
+                        style: style,
+                      )
               ],
             ),
           ),
@@ -98,7 +94,13 @@ class SubCategoryModel extends StatelessWidget {
               image: AssetImage(assetName),
             ),
           ),
-          Text(subCategoryName),
+          Text(
+            subCategoryName,
+            style: const TextStyle(
+              fontSize: 14,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );
