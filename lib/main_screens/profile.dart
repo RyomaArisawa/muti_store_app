@@ -12,200 +12,244 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            expandedHeight: 140,
-            flexibleSpace: LayoutBuilder(
-              builder: (context, constrains) {
-                return FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
-                    opacity: constrains.biggest.height <= 120 ? 1 : 0,
-                    child: const Text(
-                      'Account',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  background: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.yellow,
-                          Colors.brown,
+      body: Stack(
+        children: [
+          Container(
+            height: 210,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.yellow,
+                  Colors.brown,
+                ],
+              ),
+            ),
+          ),
+          CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                elevation: 0,
+                pinned: true,
+                backgroundColor: Colors.white,
+                expandedHeight: 140,
+                flexibleSpace: LayoutBuilder(
+                  builder: (context, constrains) {
+                    return FlexibleSpaceBar(
+                      centerTitle: true,
+                      title: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 200),
+                        opacity: constrains.biggest.height <= 120 ? 1 : 0,
+                        child: const Text(
+                          'Account',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      background: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.yellow,
+                              Colors.brown,
+                            ],
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 25, left: 30),
+                          child: Row(
+                            children: [
+                              const CircleAvatar(
+                                radius: 50,
+                                backgroundImage: AssetImage('images/inapp/guest.jpg'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 25),
+                                child: Text(
+                                  'guest'.toUpperCase(),
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 80,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                bottomLeft: Radius.circular(30),
+                              ),
+                            ),
+                            child: TextButton(
+                              child: SizedBox(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: const Center(
+                                  child: Text(
+                                    'Cart',
+                                    style: TextStyle(
+                                      color: Colors.yellow,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                          Container(
+                            color: Colors.yellow,
+                            child: TextButton(
+                              child: SizedBox(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: const Center(
+                                  child: Text(
+                                    'Orders',
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(30),
+                                bottomRight: Radius.circular(30),
+                              ),
+                            ),
+                            child: TextButton(
+                              child: SizedBox(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: const Center(
+                                  child: Text(
+                                    'WishList',
+                                    style: TextStyle(
+                                      color: Colors.yellow,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {},
+                            ),
+                          )
                         ],
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
+                    Container(
+                      color: Colors.grey.shade300,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 150,
+                            child: Image(
+                              image: AssetImage('images/inapp/logo.jpg'),
+                            ),
+                          ),
+                          const ProfileHeaderLabel(
+                            headerLabel: 'Account Info.',
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 250,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Column(
+                                children: const [
+                                  RepeatedListTile(
+                                    title: 'Email Address',
+                                    subtitle: 'example@email.com',
+                                    iconData: Icons.email,
+                                  ),
+                                  YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'Phone Number',
+                                    subtitle: '+11111',
+                                    iconData: Icons.phone,
+                                  ),
+                                  YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'Address',
+                                    subtitle: 'example:140 - st - New Gersy',
+                                    iconData: Icons.location_pin,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const ProfileHeaderLabel(
+                            headerLabel: 'Account Settings',
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 210,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Column(
+                                children: [
+                                  RepeatedListTile(
+                                    title: 'Edit Profile',
+                                    iconData: Icons.edit,
+                                    onTap: () {},
+                                  ),
+                                  const YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'Change Password',
+                                    iconData: Icons.lock,
+                                    onTap: () {},
+                                  ),
+                                  const YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'Log Out',
+                                    iconData: Icons.logout,
+                                    onTap: () {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Container(
-                  height: 80,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                          ),
-                        ),
-                        child: TextButton(
-                          child: SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.2,
-                            child: const Center(
-                              child: Text(
-                                'Cart',
-                                style: TextStyle(
-                                  color: Colors.yellow,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                      Container(
-                        color: Colors.yellow,
-                        child: TextButton(
-                          child: SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.2,
-                            child: const Center(
-                              child: Text(
-                                'Orders',
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                        ),
-                        child: TextButton(
-                          child: SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.2,
-                            child: const Center(
-                              child: Text(
-                                'WishList',
-                                style: TextStyle(
-                                  color: Colors.yellow,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 150,
-                  child: Image(
-                    image: AssetImage('images/inapp/logo.jpg'),
-                  ),
-                ),
-                const ProfileHeaderLabel(
-                  headerLabel: 'Account Info.',
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 250,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      children: const [
-                        RepeatedListTile(
-                          title: 'Email Address',
-                          subtitle: 'example@email.com',
-                          iconData: Icons.email,
-                        ),
-                        YellowDivider(),
-                        RepeatedListTile(
-                          title: 'Phone Number',
-                          subtitle: '+11111',
-                          iconData: Icons.phone,
-                        ),
-                        YellowDivider(),
-                        RepeatedListTile(
-                          title: 'Address',
-                          subtitle: 'example:140 - st - New Gersy',
-                          iconData: Icons.location_pin,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const ProfileHeaderLabel(
-                  headerLabel: 'Account Settings',
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 210,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      children: [
-                        RepeatedListTile(
-                          title: 'Edit Profile',
-                          iconData: Icons.edit,
-                          onTap: () {},
-                        ),
-                        YellowDivider(),
-                        RepeatedListTile(
-                          title: 'Change Password',
-                          iconData: Icons.lock,
-                          onTap: () {},
-                        ),
-                        YellowDivider(),
-                        RepeatedListTile(
-                          title: 'Log Out',
-                          iconData: Icons.logout,
-                          onTap: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );
